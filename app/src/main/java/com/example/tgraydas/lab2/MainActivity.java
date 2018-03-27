@@ -1,8 +1,11 @@
 package com.example.tgraydas.lab2;
 
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,10 +15,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +47,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
 
     @Override
@@ -79,19 +87,23 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
+        RelativeLayout rl_formulario = findViewById(R.id.fragment_container);
+        RelativeLayout rl_list = findViewById(R.id.list_fragment_container);
+        RelativeLayout rl_resume = findViewById(R.id.resume_fragment_container);
+        if (id == R.id.formulario) {
+            rl_formulario.setVisibility(View.VISIBLE);
+            rl_list.setVisibility(View.GONE);
+            rl_resume.setVisibility(View.GONE);
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.resumen_formulario) {
+            rl_list.setVisibility(View.GONE);
+            rl_formulario.setVisibility(View.GONE);
+            rl_resume.setVisibility(View.VISIBLE);
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.vista_formulario) {
+            rl_resume.setVisibility(View.GONE);
+            rl_formulario.setVisibility(View.GONE);
+            rl_list.setVisibility(View.VISIBLE);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
